@@ -1,0 +1,18 @@
+az account list --output=table
+
+az ad sp create-for-rbac  --name sp_terraform --role contributor --scopes /subscriptions/XXX
+
+$env:ARM_CLIENT_ID="XXX"
+$env:ARM_CLIENT_SECRET="XXX"
+$env:ARM_TENANT_ID="XXX"
+$env:ARM_SUBSCRIPTION_ID="XXX"
+
+az logout
+az account list --output=table
+
+terraform apply
+
+az login           
+
+az ad sp delete --id $env:ARM_CLIENT_ID
+
